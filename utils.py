@@ -10,6 +10,9 @@ def rotation_matrix(axis, angle):
     return np.matrix([[c+ux**2*(1-c),    ux*uy*(1-c)-uz*s, ux*uz*(1-c)+uy*s],
                       [uy*ux*(1-c)+uz*s, c+uy**2*(1-c),    uy*uz*(1-c)-ux*s],
                       [uz*ux*(1-c)-uy*s, uz*uy*(1-c)+ux*s, c+uz**2*(1-c)]])
-                      
+
 def to_radians(degrees):
     return math.pi*degrees/180.
+
+def rad_to_deg(radians):
+    return radians*180./math.pi

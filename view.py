@@ -1,5 +1,10 @@
+from __future__ import print_function
+import line
 from line import Line
 from vec2 import Vec2
+from vec3 import Vec3
+import utils
+from plane import Plane
 
 class View(object):
     def __init__(self, screen_dist):
@@ -39,3 +44,20 @@ class View(object):
 
     def pop_transform(self):
         return self.transforms.pop()
+
+    def get_plane(self, sp1, sp2, sp3, dist_21, dist_23, ang_13):
+        l01 = self.line(sp1)
+        l02 = self.line(sp2)
+        l03 = self.line(sp3)
+        param = 0
+        a = l02.get_point(param)
+        t1 = l01.get_point_at_dist(a, dist_21, line.Direction.POSITIVE)
+        t3 = l03.get_point_at_dist(a, dist_23, line.Direction.POSITIVE)
+        ang = Vec3.angle_between(t1-a, t3-a)
+        while abs(ang-ang_13) > 0.00001:
+            param += 0.01*abs(ang-ang_13)
+            a = l02.get_point(param)
+            t1 = l01.get_point_at_dist(a, dist_21, line.Direction.POSITIVE)
+            t3 = l03.get_point_at_dist(a, dist_23, line.Direction.POSITIVE)
+            ang = Vec3.angle_between(t1-a, t3-a)
+        return Plane(a, t1-a, t3-a)

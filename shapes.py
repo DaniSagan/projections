@@ -1,6 +1,7 @@
 from __future__ import print_function
 from vec3 import Vec3
 from vec2 import Vec2
+from boundingbox import BoundingBox
 
 class LineStripe(object):
     def __init__(self, vertices, indices):
@@ -17,6 +18,9 @@ class Shape(object):
     def __init__(self, vertices, index_lists):
         self.vertices = vertices
         self.index_lists = index_lists
+        self.bounding_box = BoundingBox()
+        for v in self.vertices:
+            self.boundingbox.bound_point(v)
 
     def get_lines(self):
         return [LineStripe(self.vertices, index_list) for index_list in self.index_lists]

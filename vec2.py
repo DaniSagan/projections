@@ -22,6 +22,9 @@ class Vec2(object):
     def __rmul__(self, value):
         return self.__mul__(value)
 
+    def __neg__(self):
+        return -1.*self
+
     def get_unit(self):
         return self*(1./abs(self))
 

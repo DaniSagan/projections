@@ -24,6 +24,9 @@ class Vec3(object):
     def __rmul__(self, value):
         return self.__mul__(value)
 
+    def __neg__(self):
+        return -1.*self
+
     def get_unit(self):
         return self*(1./abs(self))
 
@@ -53,3 +56,7 @@ class Vec3(object):
     @staticmethod
     def from_to(v1, v2):
         return v2-v1
+
+    @staticmethod
+    def angle_between(v1, v2):
+        return math.acos(Vec3.dot(v1, v2)/(abs(v1)*abs(v2)))
