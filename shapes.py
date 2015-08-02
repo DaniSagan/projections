@@ -1,3 +1,4 @@
+from __future__ import print_function
 from vec3 import Vec3
 from vec2 import Vec2
 
@@ -19,6 +20,21 @@ class Shape(object):
 
     def get_lines(self):
         return [LineStripe(self.vertices, index_list) for index_list in self.index_lists]
+
+    @staticmethod
+    def load(filename):
+        with open(filename, 'r') as fobj:
+            vertices = []
+            lines = []
+            for line in fobj:
+                data = line.split()
+                if data[0] == 'v':
+                    vertices.append(Vec3(float(data[1]), float(data[2]), float(data[3])))
+                elif data[0] == 'f':
+                    lines.append([int(d)-1 for d in data[1:]])
+        print('loaded ' + str(len(vertices)) + ' vertices, ' + str(len(lines)) + ' lines')
+        return Shape(vertices, lines)
+
 
 SQUARE = Shape([Vec3(-0.5, -0.5, 0.), Vec3(0.5, -0.5, 0.), Vec3(0.5, 0.5, 0.), Vec3(-0.5, 0.5, 0.)], [[0, 1, 2, 3, 0]])
 CUBE = Shape([Vec3(-0.5, -0.5, -0.5), Vec3(0.5, -0.5, -0.5), Vec3(0.5, 0.5, -0.5), Vec3(-0.5, 0.5, -0.5),
