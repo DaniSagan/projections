@@ -1,5 +1,8 @@
+__author__ = 'daniel'
+
 import numpy as np
 import math
+
 
 def rotation_matrix(axis, angle):
     ux = axis.x
@@ -11,8 +14,10 @@ def rotation_matrix(axis, angle):
                       [uy*ux*(1-c)+uz*s, c+uy**2*(1-c),    uy*uz*(1-c)-ux*s],
                       [uz*ux*(1-c)-uy*s, uz*uy*(1-c)+ux*s, c+uz**2*(1-c)]])
 
-def to_radians(degrees):
+
+def deg_to_rad(degrees):
     return math.pi*degrees/180.
+
 
 def rad_to_deg(radians):
     return radians*180./math.pi

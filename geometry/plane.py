@@ -1,6 +1,7 @@
+__author__ = 'daniel'
+
 from vec3 import Vec3
-from enum import Enum
-import math
+
 
 class Plane(object):
     def __init__(self, origin, direction1, direction2):

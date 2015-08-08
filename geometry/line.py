@@ -1,11 +1,16 @@
 from __future__ import print_function
+
+__author__ = 'daniel'
+
 from vec3 import Vec3
 from enum import Enum
 import math
 
+
 class Direction(Enum):
     POSITIVE = 0
     NEGATIVE = 1
+
 
 class Line(object):
     def __init__(self, origin, direction):
@@ -26,7 +31,7 @@ class Line(object):
         closest = self.get_closest_point_to(point)
         dist_to_point = self.get_dist_to_point(point)
         if dist_to_point > dist:
-            raise ValueError('Parameter dist must be greater than the shortest distance from the point to the line')
+            raise ValueError('Parameter dist must be greater than the shortest distance from the point to the line. dist_to_point: {0}, dist: {1}'.format(dist_to_point, dist))
         if direction == Direction.POSITIVE:
             return closest + math.sqrt(dist**2 - dist_to_point**2)*self.direction.get_unit()
         else:

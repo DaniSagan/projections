@@ -1,6 +1,9 @@
+__author__ = 'daniel'
+
 import math
 import numpy as np
 import utils
+
 
 class Vec3(object):
     def __init__(self, x, y, z):
@@ -33,6 +36,15 @@ class Vec3(object):
     def as_matrix(self):
         return np.matrix([self.x, self.y, self.z]).T
 
+    def apply(self, fn):
+        return Vec3(fn(self.x), fn(self.y), fn(self.z))
+
+    def reduce(self, fn, init_value=0.):
+        return reduce(fn, self.tuple(), init_value)
+
+    def tuple(self):
+        return self.x, self.y, self.z
+
     @staticmethod
     def from_matrix(m):
         return Vec3(m.item(0), m.item(1), m.item(2))
@@ -60,3 +72,7 @@ class Vec3(object):
     @staticmethod
     def angle_between(v1, v2):
         return math.acos(Vec3.dot(v1, v2)/(abs(v1)*abs(v2)))
+
+I = Vec3(1., 0., 0.)
+J = Vec3(0., 1., 0.)
+K = Vec3(0., 0., 1.)

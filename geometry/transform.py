@@ -1,4 +1,7 @@
-from vec3 import Vec3
+__author__ = 'daniel'
+
+from geometry.vec3 import Vec3
+
 
 class Transform(object):
     def transform(self, point):

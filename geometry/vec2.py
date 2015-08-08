@@ -1,4 +1,8 @@
+__author__ = 'daniel'
+
 import math
+import numpy as np
+
 
 class Vec2(object):
     def __init__(self, x, y):
@@ -27,6 +31,18 @@ class Vec2(object):
 
     def get_unit(self):
         return self*(1./abs(self))
+
+    def as_matrix(self):
+        return np.matrix([self.x, self.y]).T
+
+    def apply(self, fn):
+        return Vec2(fn(self.x), fn(self.y))
+
+    def reduce(self, fn, init_value=0.):
+        return reduce(fn, self.tuple(), init_value)
+
+    def tuple(self):
+        return self.x, self.y
 
     @staticmethod
     def dot(v1, v2):
